@@ -20,14 +20,15 @@
     },
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "~4.0|~5.0|~5.1"
+        "illuminate/support": "~4.0|~5.0|~5.1",
+        "ramsey/uuid": "^3.5"
     },
     "autoload": {
         "classmap": [
             "src/migrations"
         ],
-        "psr-0": {
-            "Joshbrw\\RevisionableUuid": "src/"
+        "psr-4": {
+            "Joshbrw\\RevisionableUuid\\": "src/"
         }
     }
 }

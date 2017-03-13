@@ -1,4 +1,6 @@
-<?php namespace Venturecraft\Revisionable;
+<?php namespace Joshbrw\RevisionableUuid;
+
+use Ramsey\Uuid\Uuid;
 
 /*
  * This file is part of the Revisionable package by Venture Craft
@@ -9,7 +11,7 @@
 
 /**
  * Class RevisionableTrait
- * @package Venturecraft\Revisionable
+ * @package Joshbrw\RevisionableUuid
  */
 trait RevisionableTrait
 {
@@ -90,7 +92,7 @@ trait RevisionableTrait
      */
     public function revisionHistory()
     {
-        return $this->morphMany('\Venturecraft\Revisionable\Revision', 'revisionable');
+        return $this->morphMany('\Joshbrw\RevisionableUuid\Revision', 'revisionable');
     }
 
     /**
@@ -102,7 +104,7 @@ trait RevisionableTrait
      */
     public static function classRevisionHistory($limit = 100, $order = 'desc')
     {
-        return \Venturecraft\Revisionable\Revision::where('revisionable_type', get_called_class())
+        return \Joshbrw\RevisionableUuid\Revision::where('revisionable_type', get_called_class())
             ->orderBy('updated_at', $order)->limit($limit)->get();
     }
 
@@ -176,6 +178,7 @@ trait RevisionableTrait
 
             foreach ($changes_to_record as $key => $change) {
                 $revisions[] = array(
+                    'id' => Uuid::uuid4(),
                     'revisionable_type' => $this->getMorphClass(),
                     'revisionable_id' => $this->getKey(),
                     'key' => $key,
@@ -218,6 +221,7 @@ trait RevisionableTrait
         if ((!isset($this->revisionEnabled) || $this->revisionEnabled))
         {
             $revisions[] = array(
+                'id' => Uuid::uuid4(),
                 'revisionable_type' => $this->getMorphClass(),
                 'revisionable_id' => $this->getKey(),
                 'key' => self::CREATED_AT,
@@ -245,6 +249,7 @@ trait RevisionableTrait
             && $this->isRevisionable($this->getDeletedAtColumn())
         ) {
             $revisions[] = array(
+                'id' => Uuid::uuid4(),
                 'revisionable_type' => $this->getMorphClass(),
                 'revisionable_id' => $this->getKey(),
                 'key' => $this->getDeletedAtColumn(),
@@ -254,7 +259,7 @@ trait RevisionableTrait
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
             );
-            $revision = new \Venturecraft\Revisionable\Revision;
+            $revision = new \Joshbrw\RevisionableUuid\Revision;
             \DB::table($revision->getTable())->insert($revisions);
             \Event::fire('revisionable.deleted', array('model' => $this, 'revisions' => $revisions));
         }
