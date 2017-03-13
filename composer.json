@@ -1,18 +1,22 @@
 {
-    "name": "venturecraft/revisionable",
+    "name": "joshbrw/revisionable-uuid",
     "license": "MIT",
-    "description": "Keep a revision history for your models without thinking, created as a package for use with Laravel",
+    "description": "A fork of VentureCraft/Revisionable, with support for UUID-based keys.",
     "keywords": ["model", "laravel", "ardent", "revision", "history"],
-    "homepage": "http://github.com/venturecraft/revisionable",
+    "homepage": "http://github.com/joshbrw/revisionable-uuid",
     "authors": [
         {
             "name": "Chris Duell",
             "email": "me@chrisduell.com"
+        },
+        {
+            "name": "Josh Brown",
+            "email": "josh@joshbrown.me"
         }
     ],
     "support": {
-        "issues": "https://github.com/VentureCraft/revisionable/issues",
-        "source": "https://github.com/VentureCraft/revisionable"
+        "issues": "https://github.com/joshbrw/revisionable-uuid/issues",
+        "source": "https://github.com/joshbrw/revisionable-uuid"
     },
     "require": {
         "php": ">=5.3.0",
@@ -23,7 +27,7 @@
             "src/migrations"
         ],
         "psr-0": {
-            "Venturecraft\\Revisionable": "src/"
+            "Joshbrw\\RevisionableUuid": "src/"
         }
     }
 }
