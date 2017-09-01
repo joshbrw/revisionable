@@ -34,6 +34,17 @@ class Revision extends Eloquent
     }
 
     /**
+     * As this model uses UUIDs we should tell Laravel that we shouldn't auto-increment,
+     * this fixes an issue where trying to access the 'id' property would return 0.
+     * @return bool
+     */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+
+    /**
      * Revisionable.
      *
      * Grab the revision history for the model that is calling
